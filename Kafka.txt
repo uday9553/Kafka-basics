@@ -1,0 +1,83 @@
+Apache Kafka is a distributed publishisubscribe messaging system.
+Messaging traditionally has 2 models.
+1.queueing and publish-subscribe
+Kafka is fact, scalable, durable, fault-tolerant and distributed by design.
+
+Kafka Terminologies.
+1.Producer
+2.Consumer
+3.Partition
+4.Broker
+5.Topic
+6.Zookeeper 
+
+1.Producer
+A Producer can be any application who can publish meesages to a topic.
+
+2.Consumer
+A Consumer can be any application that subscribes to one topic and consume messages from that topic.
+
+3.Partition
+Topics are broken up into ordered commit logs called partitions
+
+4.Broker
+Kafka cluster is a set of servers, each of which is called a broker.
+
+5.Topic 
+A Topic is a category or feed name to which records are published
+
+6.ZooKeeper
+Zookeeper is used for managing and coordinating Kafka broker.
+ 
+
+
+Kafka competitors:
+AMQP(Advanced Message queue protocol).
+RabbitMQ(Asynchronous Message queue).
+JMS Queue.
+Amazon Kinesis(High volume)(streams,firehorse,analytics).
+Active MQ.
+IBM MQ
+Microsoft MQ.
+
+Kafka Advantages:
+Scalable, Reliable, Performance, Durable, Security(SSL,SASL)
+
+Kafka Usecases:
+Messaging system
+Storage system
+Stream processing
+
+Imp Points:
+Once data is written to Topic, data cannot be modified(data is immutable).
+While publishing the data to topic, data is assigned randomly to the partitions, until and unless a key is provided.
+ Kafka server is a bootstrap server
+
+Replication Factor:
+It is like fault tolerance.
+It should be always greater than 1.
+
+Leader For Partition:
+It is like boss of all partition. i.e first data comes to the partition that we make it as Leader.
+ISR(Insync replication).
+If in case Leader partition goes down then replica ISR will be given broker. once it is back then previous partition gets the Leader back
+
+Zookeepr manages all broker servers.
+
+To start Zookeeper server
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+To start Kafka server
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+To Create a Topic
+.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic TestTopic
+
+To Check List of topics 
+.\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
+
+To start Kafka producer
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic TestTopic
+
+To start Kafka consumer
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic TestTopic --from-begining
